@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LANG=C
+
 cat << EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +22,8 @@ for url in $(cat $URLS); do
             my ($url) = /href="([^"]*)"/;
             my ($place, $date) = $url =~ m!/preliminary-record-([^/]*)/show-time/(\d{4}\.\d{2}\.\d{2})/!;
             print "<a href=\"$url_base$url\"> $date</a> $place <br>\n";
-        }' &
-done | sort -t'>' -k2 -n
+        }'
+done | sort -t'>' -k2 | column -t -s' '
 
 cat << EOF
     </body>
